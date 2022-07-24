@@ -43,7 +43,22 @@ async function displayMenu(){
 }
 
 async function addNewPlayer(){
-  
+  const response = await prompts({
+		type: 'text',
+		name: 'value',
+		message: `Enter player's name.`
+	})
+
+	if (!response.value){
+		console.error('Please enter valid name.')
+		return
+	}
+
+	db.run('INSERT INTO users (name,win,lose,winrate) VALUES (?,?,?,?)',[response.value,0,0,0],(err)=>{
+		if (err) {
+			console.error(err.message)
+		}
+	})
 }
 
 async function recordMatch(){
