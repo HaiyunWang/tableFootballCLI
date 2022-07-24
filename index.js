@@ -28,7 +28,18 @@ async function main(){
 main()
 
 async function displayMenu(){
-  
+  const response  = await prompts({
+    type:'select',
+    name:'menus',
+    actions:[
+      {title:'Add new player',value:1},
+      {title:'Record a match',value:2},
+      {title:'Check leaderboard',value:3},
+      {title:'Exit',value:4}
+    ]
+  })
+  state = response.value;
+  console.log('state',state)
 }
 
 async function addNewPlayer(){
